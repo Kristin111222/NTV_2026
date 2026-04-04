@@ -1,8 +1,11 @@
-import './App.css'
+import { AppProvider } from "./context/AppContext";
 
 function App() {
-
-  return <h1>Skilaverkefni 1</h1>;
+  return (
+    <AppProvider>
+      <h1>Team Task Hub</h1>
+    </AppProvider>
+  );
 }
 
 export default App;
