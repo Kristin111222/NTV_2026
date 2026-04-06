@@ -2,13 +2,14 @@ export type Task = {
   id: string;
   title: string;
   completed: boolean;
+  projectId: string
   priority: "low" | "medium" | "high";
 };
 
 export type Project = {
   id: string;
   name: string;
-  tasks: Task[];
+  //tasks: Task[];
 };
 
 export type Filters = {

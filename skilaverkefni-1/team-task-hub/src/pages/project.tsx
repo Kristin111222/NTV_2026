@@ -8,21 +8,40 @@ function ProjectsPage() {
 
   if (!context) return null;
 
-  const { state } = context;
+  const { state, dispatch } = context;
+
+  function addProject() {
+    const name = prompt("Project name?");
+    if (!name) return;
+
+    dispatch({
+      type: "ADD_PROJECT",
+      payload: {
+        id: crypto.randomUUID(),
+        name,
+      },
+    });
+  }
 
   return (
     <div>
       <h1>Projects</h1>
 
-      <button>Add new project</button>
+      <button onClick={addProject}>Add new project</button>
 
       {state.projects.map((project) => (
-        <div
+        <button
           key={project.id}
           onClick={() => navigate(`/tasks/${project.id}`)}
+          style={{
+            display: "block",
+            margin: "8px 0",
+            padding: "8px",
+            cursor: "pointer",
+          }}
         >
           {project.name}
-        </div>
+        </button>
       ))}
     </div>
   );

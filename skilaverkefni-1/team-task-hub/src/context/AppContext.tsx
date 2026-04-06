@@ -1,6 +1,8 @@
 import { createContext, useReducer } from "react";
 import type { Task, Project } from "../types";
 
+// ---------------- TYPES ----------------
+
 type State = {
   tasks: Task[];
   projects: Project[];
@@ -8,23 +10,30 @@ type State = {
 
 type Action =
   | { type: "ADD_TASK"; payload: Task }
-  | { type: "TOGGLE_TASK"; payload: string };
+  | { type: "TOGGLE_TASK"; payload: string }
+  | { type: "ADD_PROJECT"; payload: Project };
 
 type AppContextType = {
   state: State;
   dispatch: React.Dispatch<Action>;
 };
 
+// ---------------- INITIAL STATE ----------------
+
 const initialState: State = {
   tasks: [],
   projects: [],
 };
 
-// function sem tekur state og action og skilar nýju state eftir því hvaða action er
+// ---------------- REDUCER ----------------
+
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "ADD_TASK":
-      return { ...state, tasks: [...state.tasks, action.payload] };
+      return {
+        ...state,
+        tasks: [...state.tasks, action.payload],
+      };
 
     case "TOGGLE_TASK":
       return {
@@ -36,12 +45,22 @@ function reducer(state: State, action: Action): State {
         ),
       };
 
+    case "ADD_PROJECT":
+      return {
+        ...state,
+        projects: [...state.projects, action.payload],
+      };
+
     default:
       return state;
   }
 }
 
+// ---------------- CONTEXT ----------------
+
 export const AppContext = createContext<AppContextType | null>(null);
+
+// ---------------- PROVIDER ----------------
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
