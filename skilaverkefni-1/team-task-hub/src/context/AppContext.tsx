@@ -1,5 +1,6 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import type { Task, Project } from "../types";
+
 
 // ---------------- TYPES ----------------
 
@@ -21,8 +22,8 @@ type AppContextType = {
 // ---------------- INITIAL STATE ----------------
 
 const initialState: State = {
-  tasks: [],
-  projects: [],
+  tasks: JSON.parse(localStorage.getItem("tasks") || "[]"),
+  projects: JSON.parse(localStorage.getItem("projects") || "[]"),
 };
 
 // ---------------- REDUCER ----------------
@@ -64,6 +65,11 @@ export const AppContext = createContext<AppContextType | null>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+    useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    localStorage.setItem("projects", JSON.stringify(state.projects));
+  }, [state.tasks, state.projects]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
