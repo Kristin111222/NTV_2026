@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 import type { Task, Project } from "../types";
 
 
-// ---------------- TYPES ----------------
+
 
 type State = {
   tasks: Task[];
@@ -11,7 +11,9 @@ type State = {
 
 type Action =
   | { type: "ADD_TASK"; payload: Task }
+  | { type: "DELETE_TASK"; payload: string }
   | { type: "TOGGLE_TASK"; payload: string }
+  | { type: "UPDATE_TASK"; payload: { id: string; title: string } }
   | { type: "ADD_PROJECT"; payload: Project };
 
 type AppContextType = {
@@ -19,17 +21,33 @@ type AppContextType = {
   dispatch: React.Dispatch<Action>;
 };
 
-// ---------------- INITIAL STATE ----------------
+
 
 const initialState: State = {
   tasks: JSON.parse(localStorage.getItem("tasks") || "[]"),
   projects: JSON.parse(localStorage.getItem("projects") || "[]"),
 };
 
-// ---------------- REDUCER ----------------
+
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
+    case "UPDATE_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload.id
+            ? { ...task, title: action.payload.title }
+            : task
+        ),
+      };
+    case "DELETE_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.filter(
+          (task) => task.id !== action.payload
+        ),
+      };
     case "ADD_TASK":
       return {
         ...state,
@@ -57,16 +75,16 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-// ---------------- CONTEXT ----------------
+
 
 export const AppContext = createContext<AppContextType | null>(null);
 
-// ---------------- PROVIDER ----------------
+
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-    useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(state.tasks));
     localStorage.setItem("projects", JSON.stringify(state.projects));
   }, [state.tasks, state.projects]);
