@@ -1,5 +1,7 @@
 import { createContext, useReducer, useEffect } from "react";
 import type { Task, Project } from "../types";
+import type { Action } from "../types";
+
 
 
 
@@ -9,13 +11,7 @@ type State = {
   projects: Project[];
 };
 
-type Action =
-  | { type: "ADD_TASK"; payload: Task }
-  | { type: "DELETE_TASK"; payload: string }
-  | { type: "TOGGLE_TASK"; payload: string }
-  | { type: "DELETE_PROJECT"; payload: string }
-  | { type: "UPDATE_TASK"; payload: { id: string; title: string } }
-  | { type: "ADD_PROJECT"; payload: Project };
+
 
 type AppContextType = {
   state: State;
@@ -65,12 +61,13 @@ function reducer(state: State, action: Action): State {
         ),
       };
 
-      case "DELETE_PROJECT":
-  return {
-    ...state,
-    projects: state.projects.filter(p => p.id !== action.payload),
-    tasks: state.tasks.filter(t => t.projectId !== action.payload), // 🔥 eyðir líka tasks
-  };
+    case "DELETE_PROJECT":
+      return {
+        ...state,
+        projects: state.projects.filter(
+          (p) => p.id !== action.payload
+        ),
+      };
 
     case "ADD_PROJECT":
       return {
@@ -85,7 +82,11 @@ function reducer(state: State, action: Action): State {
 
 
 
-export const AppContext = createContext<AppContextType | null>(null);
+export const AppContext = createContext<{
+  state: State;
+  dispatch: React.Dispatch<Action>;
+} | null>(null);
+
 
 
 

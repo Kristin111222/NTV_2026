@@ -6,7 +6,6 @@ import { Card, CardContent } from "../components/ui/card";
 function TasksPage() {
   const context = useContext(AppContext);
   const { projectId } = useParams();
-
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -60,7 +59,7 @@ function TasksPage() {
     
       <h1 className="text-3xl font-bold">
         
-        {project?.name} Tasks
+        {project?.name} - Tasks
       </h1>
 
      
@@ -165,11 +164,11 @@ function TasksPage() {
               <span>
                 {task.completed ? (
                   <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">
-                    -
+                    completed
                   </span>
                 ) : (
                   <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">
-                    -
+                    pending
                   </span>
                 )}
               </span>

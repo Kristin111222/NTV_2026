@@ -24,31 +24,50 @@ function ProjectsPage() {
     });
   }
 
+  function deleteProject(id: string) {
+    dispatch({
+      type: "DELETE_PROJECT",
+      payload: id,
+    });
+  }
+
   return (
-    <div className="bg-gray-500 text-white p-10">
-      
-      
-      <div className="flex flex-col items-center pt-10 gap-6">
-        <h1 className="text-3xl font-bold">Projects</h1>
+    <div className="border-gray-200 rounded-xl p-4 shadow-sm flex flex-col items-center">
 
-        <button
-          onClick={addProject}
-          className="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90"
-        >
-          Add project
-        </button>
-      </div>
+      <h1 className="text-gray-800 text-lg font-semibold mt-6">
+        Projects
+      </h1>
 
-   
-     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl">
+      <button
+        onClick={addProject}
+        className="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90 mt-4"
+      >
+        Add project
+      </button>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-5xl mt-8">
         {state.projects.map((project) => (
           <Card
             key={project.id}
-            className="cursor-pointer hover:shadow-md transition"
+            className="cursor-pointer hover:shadow-md transition p-2"
             onClick={() => navigate(`/tasks/${project.id}`)}
           >
-            <CardContent>
-              <p className="text-lg font-medium">{project.name}</p>
+            <CardContent className="flex flex-col gap-2">
+
+              <p className="text-lg font-medium">
+                {project.name}
+              </p>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // kemur í veg fyrir navigation
+                  deleteProject(project.id);
+                }}
+                className="text-red-500 hover:text-red-700 text-sm self-start"
+              >
+                Delete
+              </button>
+
             </CardContent>
           </Card>
         ))}
