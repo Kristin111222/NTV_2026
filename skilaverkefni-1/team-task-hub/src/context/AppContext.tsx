@@ -13,6 +13,7 @@ type Action =
   | { type: "ADD_TASK"; payload: Task }
   | { type: "DELETE_TASK"; payload: string }
   | { type: "TOGGLE_TASK"; payload: string }
+  | { type: "DELETE_PROJECT"; payload: string }
   | { type: "UPDATE_TASK"; payload: { id: string; title: string } }
   | { type: "ADD_PROJECT"; payload: Project };
 
@@ -63,6 +64,13 @@ function reducer(state: State, action: Action): State {
             : task
         ),
       };
+
+      case "DELETE_PROJECT":
+  return {
+    ...state,
+    projects: state.projects.filter(p => p.id !== action.payload),
+    tasks: state.tasks.filter(t => t.projectId !== action.payload), // 🔥 eyðir líka tasks
+  };
 
     case "ADD_PROJECT":
       return {

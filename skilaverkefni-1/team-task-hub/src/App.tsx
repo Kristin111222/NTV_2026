@@ -3,8 +3,11 @@ import { AppProvider } from "./context/AppContext";
 import ProjectsPage from "./pages/project";
 import TasksPage from "./pages/task";
 
+import { Card } from "./components/ui/card";
+
 function App() {
   return (
+    <Card>
     <AppProvider>
       <BrowserRouter>
         <Routes>
@@ -13,6 +16,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AppProvider>
+    </Card>
   );
 }
 
