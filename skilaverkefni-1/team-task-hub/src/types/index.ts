@@ -1,3 +1,22 @@
+import { z } from "zod";
+
+export const TaskSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  completed: z.boolean(),
+  projectId: z.string(),
+  priority: z.enum(["low", "medium", "high"]),
+});
+
+export const ProjectSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+export const TasksSchema = z.array(TaskSchema);
+export const ProjectsSchema = z.array(ProjectSchema);
+
+
 export type Task = {
   id: string;
   title: string;

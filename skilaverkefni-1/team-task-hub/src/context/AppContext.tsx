@@ -1,9 +1,11 @@
 import { createContext, useReducer, useEffect } from "react";
 import type { Task, Project } from "../types";
 import type { Action } from "../types";
+import { TasksSchema, ProjectsSchema } from "../types";
 
 
-
+// Local storage
+// parsing og validation með zod
 
 
 type State = {
@@ -20,9 +22,19 @@ type AppContextType = {
 
 
 
+
+
+const tasksParsed = TasksSchema.safeParse(
+  JSON.parse(localStorage.getItem("tasks") || "[]")
+);
+
+const projectsParsed = ProjectsSchema.safeParse(
+  JSON.parse(localStorage.getItem("projects") || "[]")
+);
+
 const initialState: State = {
-  tasks: JSON.parse(localStorage.getItem("tasks") || "[]"),
-  projects: JSON.parse(localStorage.getItem("projects") || "[]"),
+  tasks: tasksParsed.success ? tasksParsed.data : [],
+  projects: projectsParsed.success ? projectsParsed.data : [],
 };
 
 
