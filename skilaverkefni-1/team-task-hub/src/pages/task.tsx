@@ -5,6 +5,7 @@ import { Card, CardContent } from "../components/ui/card";
 import DashboardStats from "../components/dashboard/stats";
 import { useTaskFilters } from "../hooks/useTaskFilters";
 import type { Filters } from "../types";
+import { useTaskStats } from "../hooks/useTaskStats";
 
 function TasksPage() {
   const context = useContext(AppContext);
@@ -38,12 +39,8 @@ function TasksPage() {
     filters
   );
 
+  const stats = useTaskStats(filteredTasks);
 
-  const stats = useMemo(() => {
-    const total = filteredTasks.length;
-    const completed = filteredTasks.filter((t) => t.completed).length;
-    return { total, completed, pending: total - completed };
-  }, [filteredTasks]);
 
   function handleAddTask() {
     if (!newTaskTitle) return;
