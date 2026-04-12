@@ -8,7 +8,7 @@ export function useTaskFilters(tasks: Task[], filters: Filters) {
     return tasks.filter((task) => {
     
       const matchesSearch = task.title
-        .toLowerCase()
+        .toLowerCase() 
         .includes(filters.search.toLowerCase());
 
     
