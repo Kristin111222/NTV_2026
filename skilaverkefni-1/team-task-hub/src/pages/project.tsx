@@ -60,7 +60,7 @@ function ProjectsPage() {
 
               <button
                 onClick={(e) => {
-                  e.stopPropagation(); // kemur í veg fyrir navigation
+                  e.stopPropagation(); 
                   deleteProject(project.id);
                 }}
                 className="text-red-500 hover:text-red-700 text-sm self-start"

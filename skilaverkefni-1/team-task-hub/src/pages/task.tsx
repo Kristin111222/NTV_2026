@@ -2,14 +2,22 @@ import { useContext, useState, useMemo } from "react";
 import { AppContext } from "../context/AppContext";
 import { useParams } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/card";
+import DashboardStats from "../components/dashboard/stats";
+import { useTaskFilters } from "../hooks/useTaskFilters";
+import type { Filters } from "../types";
 
 function TasksPage() {
   const context = useContext(AppContext);
   const { projectId } = useParams();
-  const [priorityFilter, setPriorityFilter] = useState("all");
+
+  const [priorityFilter, setPriorityFilter] = useState<
+    "all" | "low" | "medium" | "high"
+  >("all");
+
   const [search, setSearch] = useState("");
   const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [newPriority, setNewPriority] = useState<"low" | "medium" | "high">("low");
+  const [newPriority, setNewPriority] =
+    useState<"low" | "medium" | "high">("low");
 
   if (!context || !projectId) return null;
 
@@ -18,22 +26,24 @@ function TasksPage() {
   const project = state.projects.find((p) => p.id === projectId);
 
 
-  const tasks = useMemo(() => {
-    return state.tasks
-      .filter((t) => t.projectId === projectId)
-      .filter((t) => {
-        if (priorityFilter !== "all" && t.priority !== priorityFilter) return false;
-        if (!t.title.toLowerCase().includes(search.toLowerCase())) return false;
-        return true;
-      });
-  }, [state.tasks, projectId, priorityFilter, search]);
+  const filters: Filters = {
+    search,
+    status: "all",
+    priority: priorityFilter,
+  };
+
+
+  const filteredTasks = useTaskFilters(
+    state.tasks.filter((t) => t.projectId === projectId),
+    filters
+  );
 
 
   const stats = useMemo(() => {
-    const total = tasks.length;
-    const completed = tasks.filter((t) => t.completed).length;
+    const total = filteredTasks.length;
+    const completed = filteredTasks.filter((t) => t.completed).length;
     return { total, completed, pending: total - completed };
-  }, [tasks]);
+  }, [filteredTasks]);
 
   function handleAddTask() {
     if (!newTaskTitle) return;
@@ -56,33 +66,18 @@ function TasksPage() {
   return (
     <div className="min-h-screen p-6 max-w-5xl mx-auto space-y-6">
 
-    
       <h1 className="text-3xl font-bold">
-        
         {project?.name} - Tasks
       </h1>
 
-     
-      <Card>
-        <CardContent>
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div>
-              <p className="text-sm text-muted-foreground">Total</p>
-              <p className="text-2xl font-bold">{stats.total}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Completed</p>
-              <p className="text-2xl font-bold">{stats.completed}</p>
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Pending</p>
-              <p className="text-2xl font-bold">{stats.pending}</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
 
-     
+      <DashboardStats
+        total={stats.total}
+        completed={stats.completed}
+        pending={stats.pending}
+      />
+
+
       <Card>
         <CardContent className="flex gap-3 flex-wrap items-center">
           <input
@@ -95,7 +90,9 @@ function TasksPage() {
 
           <select
             value={newPriority}
-            onChange={(e) => setNewPriority(e.target.value as any)}
+            onChange={(e) =>
+              setNewPriority(e.target.value as "low" | "medium" | "high")
+            }
             className="border px-3 py-2 rounded-lg"
           >
             <option value="low">Low</option>
@@ -112,11 +109,11 @@ function TasksPage() {
         </CardContent>
       </Card>
 
-     
+
       <Card>
         <CardContent className="p-0">
 
-         
+
           <div className="flex justify-between items-center p-4 border-b">
             <h2 className="font-semibold">Tasks</h2>
 
@@ -131,7 +128,11 @@ function TasksPage() {
 
               <select
                 value={priorityFilter}
-                onChange={(e) => setPriorityFilter(e.target.value)}
+                onChange={(e) =>
+                  setPriorityFilter(
+                    e.target.value as "all" | "low" | "medium" | "high"
+                  )
+                }
                 className="border px-3 py-1 rounded-lg"
               >
                 <option value="all">All</option>
@@ -142,7 +143,7 @@ function TasksPage() {
             </div>
           </div>
 
-        
+
           <div className="grid grid-cols-5 p-3 border-b text-sm font-medium">
             <span>Task</span>
             <span>Status</span>
@@ -151,8 +152,8 @@ function TasksPage() {
             <span>Actions</span>
           </div>
 
-         
-          {tasks.map((task) => (
+
+          {filteredTasks.map((task) => (
             <div
               key={task.id}
               className="grid grid-cols-5 items-center p-3 border-b hover:bg-gray-50"
@@ -173,19 +174,7 @@ function TasksPage() {
                 )}
               </span>
 
-              <span>
-                <span
-                  className={`px-2 py-1 rounded text-xs ${
-                    task.priority === "high"
-                      ? "bg-red-100 text-red-600"
-                      : task.priority === "medium"
-                      ? "bg-yellow-100 text-yellow-600"
-                      : "bg-green-100 text-green-600"
-                  }`}
-                >
-                  {task.priority}
-                </span>
-              </span>
+              <span>{task.priority}</span>
 
               <input
                 type="checkbox"
@@ -225,7 +214,6 @@ function TasksPage() {
 
         </CardContent>
       </Card>
-
     </div>
   );
 }
