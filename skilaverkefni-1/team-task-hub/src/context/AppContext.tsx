@@ -4,8 +4,6 @@ import type { Action } from "../types";
 import { TasksSchema, ProjectsSchema } from "../types";
 
 
-// Local storage
-// parsing og validation með zod
 
 
 type State = {
