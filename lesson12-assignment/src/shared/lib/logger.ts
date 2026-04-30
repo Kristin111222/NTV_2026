@@ -11,5 +11,11 @@
 //    ever want to forward errors to Sentry / a backend, you change one file.
 
 export const logger = {
-  // TODO
+  log(...args: unknown[]) {
+    console.log('[log]', ...args);
+  },
+  error(message: string, error?: unknown) {
+    console.error('[error]', message, error);
+  },
+
 };

@@ -1,10 +1,13 @@
 import { useState, useCallback, type ReactNode } from 'react';
 import type { Product } from '@/features/products/types';
 import type { CartItem } from '../types';
-import { CartContext } from './cartContext';
+//import { CartContext } from './CartContext';
+
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+
+  
 
   const addToCart = useCallback((product: Product) => {
     setItems((prev) => {

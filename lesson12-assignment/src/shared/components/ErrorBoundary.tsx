@@ -16,3 +16,37 @@
 // Hints:
 // - Import { Component, type ErrorInfo, type ReactNode } from 'react'
 // - Import { logger } from '@/shared/lib/logger'
+import {Component, type ErrorInfo, type ReactNode } from 'react';
+import { logger } from '@/shared/lib/logger';
+
+
+type Props = {
+  children: ReactNode;
+};
+
+type State = {
+  hasError: boolean;
+};
+
+export class ErrorBoundary extends Component<Props, State> {
+  state: State = { hasError: false };
+
+  static getDerivedStateFromError(): State {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    logger.error('ErrorBoundary caught a render error', { error, info });
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="rounded border border-red-300 bg-red-50 p-4 text-red-800">
+          <p className="font-semibold">Something went wrong.</p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}

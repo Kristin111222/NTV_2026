@@ -7,15 +7,16 @@ import { CartPage } from '@/pages/CartPage';
 
 function App() {
   return (
-    <CartProvider>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<ProductsPage />} />
-          <Route path="cart" element={<CartPage />} />
-        </Route>
-      </Routes>
-    </CartProvider>
+      <CartProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<ProductsPage />} />
+            <Route path="cart" element={<CartPage />} />
+          </Route>
+        </Routes>
+      </CartProvider>
   );
 }
+
 
 export default App;
