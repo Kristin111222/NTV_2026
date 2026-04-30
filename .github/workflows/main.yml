@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  PROJECT: "."
+  PROJECT: "lesson8"
 
 jobs:
   build:
