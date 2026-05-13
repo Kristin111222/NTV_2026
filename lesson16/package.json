@@ -19,7 +19,10 @@
     "radix-ui": "^1.4.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+<<<<<<< HEAD
     "react-router-dom": "^7.15.0",
+=======
+>>>>>>> d687c8e3256f464e156504c1fe9982e44e7ddda4
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1"
   },

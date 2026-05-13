@@ -7,7 +7,10 @@ on:
 
 env:
   PROJECT: lesson14
+<<<<<<< HEAD
   PROJECT: "lesson8"
+=======
+>>>>>>> d687c8e3256f464e156504c1fe9982e44e7ddda4
 
 jobs:
   build:

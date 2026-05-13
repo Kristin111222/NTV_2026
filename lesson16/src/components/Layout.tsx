@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -31,6 +32,27 @@ useEffect(() => {
   };
 }, []);
 
+=======
+import type { AppPage } from '@/navigation';
+import type { ReactNode } from 'react';
+
+type LayoutProps = {
+  activePage: AppPage;
+  onNavigate: (page: AppPage) => void;
+  children: ReactNode;
+};
+
+function navButtonClassName(isActive: boolean) {
+  return [
+    'rounded-md px-3 py-2 text-sm font-medium transition-colors',
+    isActive
+      ? 'bg-primary text-primary-foreground'
+      : 'text-muted-foreground hover:bg-muted hover:text-foreground',
+  ].join(' ');
+}
+
+export function Layout({ activePage, onNavigate, children }: LayoutProps) {
+>>>>>>> d687c8e3256f464e156504c1fe9982e44e7ddda4
   return (
     <div className="bg-background min-h-screen">
       <header className="border-border bg-card/50 border-b backdrop-blur-sm">
@@ -38,6 +60,7 @@ useEffect(() => {
           <p className="text-foreground text-sm font-semibold tracking-tight">
             Lesson 16
           </p>
+<<<<<<< HEAD
 
           <nav className="flex flex-wrap gap-2">
             {/* Home */}
@@ -78,3 +101,27 @@ useEffect(() => {
     </div>
   );
 }
+=======
+          <nav className="flex flex-wrap gap-2" aria-label="Main navigation">
+            <button
+              type="button"
+              className={navButtonClassName(activePage === 'home')}
+              onClick={() => onNavigate('home')}
+            >
+              Home
+            </button>
+            <button
+              type="button"
+              className={navButtonClassName(activePage === 'about')}
+              onClick={() => onNavigate('about')}
+            >
+              About
+            </button>
+          </nav>
+        </div>
+      </header>
+      <main className="mx-auto w-full max-w-6xl px-4 py-8">{children}</main>
+    </div>
+  );
+}
+>>>>>>> d687c8e3256f464e156504c1fe9982e44e7ddda4

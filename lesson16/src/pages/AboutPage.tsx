@@ -3,7 +3,10 @@ export function AboutPage() {
     <div className="mx-auto max-w-2xl space-y-4 text-left">
       <h1 className="text-3xl font-bold tracking-tight">About the app</h1>
       <p className="text-muted-foreground text-sm">
+<<<<<<< HEAD
         Verkefni 16 um að bæta við React Router við appið.
+=======
+>>>>>>> d687c8e3256f464e156504c1fe9982e44e7ddda4
         This is the about view, still driven by state in{' '}
         <code className="bg-muted rounded px-1.5 py-0.5 font-mono text-xs">
           App.tsx
