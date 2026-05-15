@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 //import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import ProjectCard from "../ProjectCard";
+import ProjectCard from "../ProjectCard/ProjectCard";
 
 describe("ProjectCard", () => {
   it("renders project name", () => {

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { Task, Filters } from "../types";
+import type { Task, Filters } from "../../types";
 
 
 

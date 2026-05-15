@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { Task } from "../types";
+import type { Task } from "../../types";
 
 export function useTaskStats(tasks: Task[]) {
   return useMemo(() => {
