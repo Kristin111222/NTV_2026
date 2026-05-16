@@ -1,11 +1,12 @@
-import { useContext, useState, useMemo } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useParams } from "react-router-dom";
 import { Card, CardContent } from "../components/ui/card";
 import DashboardStats from "../components/dashboard/stats";
-import { useTaskFilters } from "../hooks/useTaskFilters";
+import { useTaskFilters } from "../hooks/useTaskFilters/useTaskFilters";
 import type { Filters } from "../types";
-import { useTaskStats } from "../hooks/useTaskStats";
+import { useTaskStats } from "../hooks/useTaskStats/useTaskStats";
+import TaskRow from "../components/tasks/TaskRow/TaskRow";
 
 function TasksPage() {
   const context = useContext(AppContext);
@@ -26,13 +27,11 @@ function TasksPage() {
 
   const project = state.projects.find((p) => p.id === projectId);
 
-
   const filters: Filters = {
     search,
     status: "all",
     priority: priorityFilter,
   };
-
 
   const filteredTasks = useTaskFilters(
     state.tasks.filter((t) => t.projectId === projectId),
@@ -40,7 +39,6 @@ function TasksPage() {
   );
 
   const stats = useTaskStats(filteredTasks);
-
 
   function handleAddTask() {
     if (!newTaskTitle) return;
@@ -62,18 +60,15 @@ function TasksPage() {
 
   return (
     <div className="min-h-screen p-6 max-w-5xl mx-auto space-y-6">
-
       <h1 className="text-3xl font-bold">
         {project?.name} - Tasks
       </h1>
-
 
       <DashboardStats
         total={stats.total}
         completed={stats.completed}
         pending={stats.pending}
       />
-
 
       <Card>
         <CardContent className="flex gap-3 flex-wrap items-center">
@@ -88,7 +83,9 @@ function TasksPage() {
           <select
             value={newPriority}
             onChange={(e) =>
-              setNewPriority(e.target.value as "low" | "medium" | "high")
+              setNewPriority(
+                e.target.value as "low" | "medium" | "high"
+              )
             }
             className="border px-3 py-2 rounded-lg"
           >
@@ -106,11 +103,8 @@ function TasksPage() {
         </CardContent>
       </Card>
 
-
       <Card>
         <CardContent className="p-0">
-
-
           <div className="flex justify-between items-center p-4 border-b">
             <h2 className="font-semibold">Tasks</h2>
 
@@ -127,7 +121,11 @@ function TasksPage() {
                 value={priorityFilter}
                 onChange={(e) =>
                   setPriorityFilter(
-                    e.target.value as "all" | "low" | "medium" | "high"
+                    e.target.value as
+                      | "all"
+                      | "low"
+                      | "medium"
+                      | "high"
                   )
                 }
                 className="border px-3 py-1 rounded-lg"
@@ -140,7 +138,6 @@ function TasksPage() {
             </div>
           </div>
 
-
           <div className="grid grid-cols-5 p-3 border-b text-sm font-medium">
             <span>Task</span>
             <span>Status</span>
@@ -149,66 +146,40 @@ function TasksPage() {
             <span>Actions</span>
           </div>
 
-
           {filteredTasks.map((task) => (
-            <div
+            <TaskRow
               key={task.id}
-              className="grid grid-cols-5 items-center p-3 border-b hover:bg-gray-50"
-            >
-              <span className={task.completed ? "line-through opacity-50" : ""}>
-                {task.title}
-              </span>
+              task={task}
+              onToggle={() =>
+                dispatch({
+                  type: "TOGGLE_TASK",
+                  payload: task.id,
+                })
+              }
+              onEdit={() => {
+                const newTitle = prompt(
+                  "Edit task:",
+                  task.title
+                );
 
-              <span>
-                {task.completed ? (
-                  <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs">
-                    completed
-                  </span>
-                ) : (
-                  <span className="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs">
-                    pending
-                  </span>
-                )}
-              </span>
+                if (!newTitle) return;
 
-              <span>{task.priority}</span>
-
-              <input
-                type="checkbox"
-                checked={task.completed}
-                onChange={() =>
-                  dispatch({ type: "TOGGLE_TASK", payload: task.id })
-                }
-              />
-
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    const newTitle = prompt("Edit task:", task.title);
-                    if (!newTitle) return;
-
-                    dispatch({
-                      type: "UPDATE_TASK",
-                      payload: { id: task.id, title: newTitle },
-                    });
-                  }}
-                  className="border px-2 py-1 rounded text-sm"
-                >
-                  Edit
-                </button>
-
-                <button
-                  onClick={() =>
-                    dispatch({ type: "DELETE_TASK", payload: task.id })
-                  }
-                  className="border px-2 py-1 rounded text-sm text-red-500"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+                dispatch({
+                  type: "UPDATE_TASK",
+                  payload: {
+                    id: task.id,
+                    title: newTitle,
+                  },
+                });
+              }}
+              onDelete={() =>
+                dispatch({
+                  type: "DELETE_TASK",
+                  payload: task.id,
+                })
+              }
+            />
           ))}
-
         </CardContent>
       </Card>
     </div>
