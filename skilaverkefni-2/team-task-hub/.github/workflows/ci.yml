@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - develop
+
   pull_request:
     branches:
       - main
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -28,14 +28,14 @@ jobs:
       - name: Run Vitest
         run: npm run test
 
-      - name: Build app
+      - name: Build project
         run: npm run build
 
       - name: Start app
         run: npm run dev &
-      
+
       - name: Wait for app
         run: npx wait-on http://localhost:5173
 
-      - name: Run Cypress E2E tests
+      - name: Run Cypress
         run: npx cypress run
