@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Projects flow", () => {
+describe("Projects flow", () => { 
 
   it("creates a new project", () => {
 
