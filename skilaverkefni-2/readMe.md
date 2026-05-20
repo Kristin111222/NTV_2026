@@ -16,12 +16,10 @@ Lagfæring frá skilaverkefni1:
 
 1) Vitest
 
- npm vitest
 
  4x test
 
 - ProjectCard src/components/_tests_/ProjectCard.test.tsx
-- ekki sett inn - useLocalStorage src/hooks/_tests_/useLocalStorage.test.tsx //implemented but not used
 - useLocalStorage src/hooks/_tests_/useTaskFilters.test.tsx
 - useLocalStorage src/hooks/_tests_/useTaskStats.test.tsx
 - TaskRow - src/components/_tests_/TaskRow.tsx
@@ -37,6 +35,36 @@ Lagfæring frá skilaverkefni1:
 3) Cypress (E2E)
 
 - project - task    cypress/e2e/task.flow.cy.ts
+
+4) CI - pipeline
+
+file fyrir pipeline er hér:
+
+- NTV_2026/ntv-forritun-fk3-vor-2026/.github/workflows/main.yml
+
+-- Til að keyra pipeline þarf að vera inní      
+NTV_2026/ntv-forritun-fk3-vor-2026
+og setja í terminal: 
+
+git push origin main
+
+Skoða actions inni á github.com
+https://github.com/Kristin111222/NTV_2026/actions
+
+5) Bugs
+
+1. Bug í vitest setup 
+
+nýtt file sett í src/test/setup.ts
+
+lagfæring í vite.config.ts
+undir test:
+setupFiles: "./src/test/setup.ts"
+
+2. 
+   - 
+
+
 
 
 
