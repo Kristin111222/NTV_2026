@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: skilaverkefni-2/team-task-hub
+        working-directory: ./skilaverkefni-2/team-task-hub
 
     steps:
       - name: Checkout repository
