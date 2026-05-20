@@ -12,6 +12,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: skilaverkefni-2/team-task-hub
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
