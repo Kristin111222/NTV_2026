@@ -38,7 +38,13 @@ Lagfæring frá skilaverkefni1:
 
 4) CI - pipeline
 
-file fyrir pipeline er hér:
+- Gott ráð er að hafa 2 terminals opin
+
+ PS C:\NTV_2026\ntv-forritun-fk3-vor-2026>
+ PS C:\NTV_2026\ntv-forritun-fk3-vor-2026\skilaverkefni-2\team-task-hub>
+
+
+Pipeline:
 
 - NTV_2026/ntv-forritun-fk3-vor-2026/.github/workflows/main.yml
 
@@ -48,6 +54,12 @@ og setja í terminal:
 
 git push origin main
 
+(Til að endurtaka git push, þá þarf að gera eina breytingu, hægt að gera bil og save, svo:
+git add .
+git commit -m "breyting"
+git push origin main)
+
+Til að athuga hvort testin í pipeline hafi farið í gegn:
 Skoða actions inni á github.com
 https://github.com/Kristin111222/NTV_2026/actions
 
@@ -61,7 +73,7 @@ lagfæring í vite.config.ts
 undir test:
 setupFiles: "./src/test/setup.ts"
 
-2. 
+2. Finna annað bug og laga. 
    - 
 
 
