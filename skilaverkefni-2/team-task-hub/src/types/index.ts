@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { useTaskFilters } from "../useTaskFilters/useTaskFilters";
 
 export const TaskSchema = z.object({
   id: z.string(),
@@ -17,13 +18,29 @@ export const TasksSchema = z.array(TaskSchema);
 export const ProjectsSchema = z.array(ProjectSchema);
 
 
-export type Task = {
-  id: string;
-  title: string;
-  completed: boolean;
-  projectId: string
-  priority: "low" | "medium" | "high";
-};
+const mockTasks: Task[] = [
+  {
+    id: "1",
+    title: "Finish React project",
+    completed: false,
+    projectId: "p1",
+    priority: "high",
+  },
+  {
+    id: "2",
+    title: "Write tests",
+    completed: true,
+    projectId: "p1",
+    priority: "medium",
+  },
+  {
+    id: "3",
+    title: "Clean desk",
+    completed: false,
+    projectId: "p2",
+    priority: "low",
+  },
+];
 
 export type Project = {
   id: string;
