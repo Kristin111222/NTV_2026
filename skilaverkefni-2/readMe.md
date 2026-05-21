@@ -74,7 +74,11 @@ undir test:
 setupFiles: "./src/test/setup.ts"
 
 2. Finna annað bug og laga. 
-   - 
+ 
+- Tómt file:
+src/hooks/_tests_/useTaskFilters.test.tsx
+
+- File var lagað og settur inn kóði fyrir test. 
 
 
 
