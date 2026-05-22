@@ -1,170 +1,176 @@
-# Team Task Hub – Testing assignment (skilaverkefni-2)
+# Team Task Hub – Testing Assignment  
+### *Skilaverkefni 2* 
+## 🔗 [Opna skilaverkefni 2 á Github](https://github.com/Kristin111222/NTV_2026/tree/main/skilaverkefni-2)
 
+---
 
-# Yfirlit:
+##  Yfirlit
 
-Til að keyra verkefnið:
+Þetta verkefni inniheldur:
 
-npm test 
+-  **Vitest** unit tests  
+-  **Storybook** component stories  
+-  **Cypress** E2E tests  
+-  **CI Pipeline** með GitHub Actions  
+-  Lagfæringar og endurskipulagningu frá *skilaverkefni 1*
 
-npm storybook
+---
 
+#  Keyra verkefnið
+
+```bash
+npm test
+```
+
+```bash
+npm run storybook
+```
+
+```bash
 npm run cypress
+```
 
-Lagfæring frá skilaverkefni1:
-- hlutum bætt í components (ProjectCard, tasks,dashboard)
+---
 
-1) Vitest
+# Lagfæringar frá skilaverkefni 1
 
+Verkefnið var endurskipulagt með því að færa hluta yfir í reusable components.
 
- 4x test
+### Components sem voru aðskilin:
+- `ProjectCard`
+- `Tasks`
+- `Dashboard`
 
-- ProjectCard src/components/_tests_/ProjectCard.test.tsx
-- useLocalStorage src/hooks/_tests_/useTaskFilters.test.tsx
-- useLocalStorage src/hooks/_tests_/useTaskStats.test.tsx
-- TaskRow - src/components/_tests_/TaskRow.tsx
+---
 
-2) Storybook
+#  1. Vitest
 
-3x stories
+### 4 test skrár
 
-- ProectCard - src/components/ProjectCard/ProjectCard.stories.tsx
-- stats      - src/components/dashboard/stats.stories.tsx
-- TaskRow    -src/components/tasks/TaskRow/TaskRow.tsx
+| Test | Path |
+|---|---|
+| ProjectCard | `src/components/_tests_/ProjectCard.test.tsx` |
+| useTaskFilters | `src/hooks/_tests_/useTaskFilters.test.tsx` |
+| useTaskStats | `src/hooks/_tests_/useTaskStats.test.tsx` |
+| TaskRow | `src/components/_tests_/TaskRow.test.tsx` |
 
-3) Cypress (E2E)
+---
 
-- project - task    cypress/e2e/task.flow.cy.ts
+#  2. Storybook
 
-4) CI - pipeline
+### 3 stories
 
-- Gott ráð er að hafa 2 terminals opin
+| Story | Path |
+|---|---|
+| ProjectCard | `src/components/ProjectCard/ProjectCard.stories.tsx` |
+| Stats | `src/components/dashboard/stats.stories.tsx` |
+| TaskRow | `src/components/tasks/TaskRow/TaskRow.stories.tsx` |
 
- PS C:\NTV_2026\ntv-forritun-fk3-vor-2026>
- PS C:\NTV_2026\ntv-forritun-fk3-vor-2026\skilaverkefni-2\team-task-hub>
+---
 
+#  3. Cypress (E2E)
 
-Pipeline:
+### E2E test
 
-- NTV_2026/ntv-forritun-fk3-vor-2026/.github/workflows/main.yml
+| Test | Path |
+|---|---|
+| Project → Task flow | `cypress/e2e/task.flow.cy.ts` |
 
--- Til að keyra pipeline þarf að vera inní      
+---
+
+#  4. CI Pipeline
+
+## Gott ráð
+Hafa **2 terminals** opin:
+
+```powershell
+PS C:\NTV_2026\ntv-forritun-fk3-vor-2026>
+```
+
+```powershell
+PS C:\NTV_2026\ntv-forritun-fk3-vor-2026\skilaverkefni-2\team-task-hub>
+```
+
+---
+
+##  Pipeline staðsetning
+
+```bash
+NTV_2026/ntv-forritun-fk3-vor-2026/.github/workflows/main.yml
+```
+
+---
+
+## ▶ Keyra pipeline
+
+Fara inn í:
+
+```bash
 NTV_2026/ntv-forritun-fk3-vor-2026
-og setja í terminal: 
+```
 
+Síðan keyra:
+
+```bash
 git push origin main
+```
 
-(Til að endurtaka git push, þá þarf að gera eina breytingu, hægt að gera bil og save, svo:
+---
+
+## Endurtaka pipeline
+
+Til að triggera pipeline aftur þarf að gera litla breytingu:
+
+```bash
 git add .
 git commit -m "breyting"
-git push origin main)
+git push origin main
+```
 
-Til að athuga hvort testin í pipeline hafi farið í gegn:
-Skoða actions inni á github.com
+---
+
+##  Athuga pipeline status
+
+GitHub Actions:
+
 https://github.com/Kristin111222/NTV_2026/actions
 
-5) Bugs
+---
 
-1. Bug í vitest setup 
+#  5. Bugs & Lagfæringar
 
-nýtt file sett í src/test/setup.ts
+## 1. Bug í Vitest setup
 
-lagfæring í vite.config.ts
-undir test:
+### Nýtt file:
+
+- Það vantaði file sem heitir setup.ts
+
+```bash
+src/test/setup.ts
+```
+
+### Lagfæring í `vite.config.ts`
+
+Undir `test`:
+
+```ts
 setupFiles: "./src/test/setup.ts"
+```
 
-2. Finna annað bug og laga. 
- 
-- Tómt file:
+---
+
+## 2. Annar bug fundinn og lagaður
+
+### Vandamál
+Tómt test file:
+
+```bash
 src/hooks/_tests_/useTaskFilters.test.tsx
+```
 
-- File var lagað og settur inn kóði fyrir test. 
-
-
-
-
-
+### Lausn
+- File var lagað
+- Test kóði settur inn
+- Vitest keyrði rétt eftir lagfæringu
 
 -----------------------------------------------------------------------------------
-## Overview
-
-In **skilaverkefni-2** the goal is to **test** the app from **skilaverkefni-1** (Team Task Hub). You build on the solution from skilaverkefni-1: the same codebase, behaviour, and requirements, but you add useful testing tooling.
-
----
-
-## Requirements (testing)
-
-Build on the code from skilaverkefni-1 and add the following.
-
-### 1. Vitest (unit / component tests)
-
-- Set up **Vitest**.
-- Write tests that cover key behaviour (e.g. hooks, presentational components, calculations, helpers).
-- Tests must run via npm.
-
-### 2. Storybook
-
-- Set up **Storybook** for the project.
-- Create stories for component units (e.g. task/project UI, empty states, side-by-side variants) so components can be inspected in isolation.
-
-### 3. Cypress (E2E)
-
-- Set up **Cypress** with E2E tests.
-- Tests must cover **at least one realistic user flow** (e.g. create a project, add a task, mark complete—depending on what the app supports) in a **real browser**.
-
-### 4. CI pipeline (tests run automatically)
-
-- Set up a **CI pipeline** that runs **tests** as far as possible, usually on `push` and/or `pull request` to main.
-- **Vitest** runs in the pipeline.
-- **Cypress (E2E)** runs in the pipeline.
-
-## 5. There are two bugs in the code that you must find and fix. Use testing to figure out what they are!
-
----
-
-## Tech stack and submission
-
-- As in skilaverkefni-1: **TypeScript** and clear structure.
-- Define in `package.json` (or equivalent) how to run Vitest, Storybook, and Cypress so the instructor can follow the description.
-- Add **CI** to the repo (e.g. `.github/workflows/...` on GitHub or equivalent on another platform) so test results are visible in the overview.
-
-### Rules and hand-in (skilaverkefni-2)
-
-- At least **5 Git commits** specifically related to testing (setup + tests)—or a similarly clear incremental commit history.
-- Link to the **repo** and (if applicable) a short description of how tests and **CI** are run.
-
----
-
-# Assessment (100 points) – percentage breakdown
-
-## 1. Vitest – 32 points
-
-- Setup is in place and tests run: **8**
-- Valid tests for logic / units: **15**
-- Readable test code and sensible use of libraries (Testing Library, etc.): **9**
-
-## 2. Storybook – 28 points
-
-- Storybook starts and stories are visible: **10**
-- Varied stories (states, props, edge cases): **13**
-- Professional story layout and consistency with the app: **5**
-
-## 3. Cypress E2E – 20 points
-
-- E2E runs reliably: **6**
-- At least one meaningful E2E path showing real behaviour: **10**
-- Stable tests, clear selectors, not overly brittle: **4**
-
-## 4. Description, docs, and link to skilaverkefni-1 – 10 points
-
-- Good organisation of tests in the project: **4**
-- README or docs describing testing: **3**
-- Accessible npm scripts: **3**
-
-## 5. CI pipeline – 10 points
-
-- CI file exists and runs are visible: **3**
-- **Vitest** runs automatically: **4**
-- **Cypress** runs automatically: **3**
-
----
