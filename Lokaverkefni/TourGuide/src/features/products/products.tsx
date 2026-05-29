@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { supabase } from '../../services/supabase'
 
 useEffect(() => {
   async function getProducts() {
