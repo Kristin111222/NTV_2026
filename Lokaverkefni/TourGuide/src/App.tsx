@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import { getProducts } from './services/products'
 import CategoryButtons from '../src/components/Buttons/CategoryButtons'
 import Navbar from '../src/components/Navbar'
+import NavbarButtons from '../src/components/Buttons/IconButtons'
 
 function App() {
 
   const [products, setProducts] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState(0)
   const [search, setSearch] = useState("")
+
 
   useEffect(() => {
     async function loadProducts() {
@@ -33,18 +35,21 @@ function App() {
   })
 
   return (
+  <>
+    <NavbarButtons />
+
     <div className="page-container">
 
-     <Navbar />
+      <Navbar />
 
       <div className="hero-section">
         <h1>Explore Vestmannaeyjar</h1>
       </div>
 
-    <CategoryButtons
-  selectedCategory={selectedCategory}
-  setSelectedCategory={setSelectedCategory}
-/>
+      <CategoryButtons
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
 
       <input
         type="text"
@@ -89,7 +94,8 @@ function App() {
       </div>
 
     </div>
-  )
+  </>
+)
 }
 
 export default App
