@@ -23,8 +23,17 @@ function App() {
         )
 
   return (
-    <div>
-      <h1>Tour Guide</h1>
+    <div className="page-container">
+
+<header className="navbar">
+
+  <button className="menu-button">
+    ☰
+  </button>
+
+  <h2>Explore Vestmannaeyjar</h2>
+
+</header>
 
       <div className="category-buttons">
 
@@ -49,26 +58,29 @@ function App() {
       <div className="products-grid">
 
         {filteredProducts.map((product) => (
-       <div className="product-card" key={product.id}>
+          <div className="product-card" key={product.id}>
 
-  <img
-    src={product.image_url}
-    alt={product.name}
-    className="product-image"
-  />
+            <img
+              src={`https://ampgjtiuisqkjanopwmz.supabase.co/storage/v1/object/public/Myndir/${product.image_url}`}
+              alt={product.name}
+              className="product-image"
+            />
 
-  <h2>{product.name}</h2>
+            <div className="product-info">
+              <h2>{product.name}</h2>
 
-  <p>${product.prize}</p>
+              <p className="price">${product.prize}</p>
 
-  <p>{product.trip_date}</p>
+              <p className="date">{product.trip_date}</p>
 
-  <button>Add to cart</button>
+              <button>Book Tour</button>
+            </div>
 
-</div>
+          </div>
         ))}
 
       </div>
+
     </div>
   )
 }
