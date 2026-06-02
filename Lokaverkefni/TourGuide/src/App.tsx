@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { getProducts } from './services/products'
+import CategoryButtons from '../src/components/Buttons/CategoryButtons'
 
 function App() {
 
   const [products, setProducts] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState(0)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     async function loadProducts() {
@@ -15,45 +17,49 @@ function App() {
     loadProducts()
   }, [])
 
-  const filteredProducts =
-    selectedCategory === 0
-      ? products
-      : products.filter(
-          (product) => product.category_id === selectedCategory
-        )
+  const filteredProducts = products.filter((product) => {
+
+    const matchesCategory =
+      selectedCategory === 0 ||
+      product.category_id === selectedCategory
+
+    const matchesSearch =
+      product.name
+        .toLowerCase()
+        .includes(search.toLowerCase())
+
+    return matchesCategory && matchesSearch
+  })
 
   return (
     <div className="page-container">
 
-<header className="navbar">
+      <header className="navbar">
 
-  <button className="menu-button">
-    ☰
-  </button>
-
-  <h2>Explore Vestmannaeyjar</h2>
-
-</header>
-
-      <div className="category-buttons">
-
-        <button onClick={() => setSelectedCategory(0)}>
-          All
+        <button className="menu-button">
+          ☰
         </button>
 
-        <button onClick={() => setSelectedCategory(1)}>
-          Adventure Tours
-        </button>
+        <h2>Explore Vestmannaeyjar</h2>
 
-        <button onClick={() => setSelectedCategory(2)}>
-          Northern Lights Tours
-        </button>
+      </header>
 
-        <button onClick={() => setSelectedCategory(3)}>
-          Museums & Culture
-        </button>
-
+      <div className="hero-section">
+        <h1>Explore Vestmannaeyjar</h1>
       </div>
+
+    <CategoryButtons
+  selectedCategory={selectedCategory}
+  setSelectedCategory={setSelectedCategory}
+/>
+
+      <input
+        type="text"
+        placeholder="Search tours..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="search-input"
+      />
 
       <div className="products-grid">
 
@@ -67,13 +73,21 @@ function App() {
             />
 
             <div className="product-info">
+
               <h2>{product.name}</h2>
 
-              <p className="price">${product.prize}</p>
+              <p className="price">
+                ${product.prize}
+              </p>
 
-              <p className="date">{product.trip_date}</p>
+              <p className="date">
+                {product.trip_date}
+              </p>
 
-              <button>Book Tour</button>
+              <button>
+                Book Tour
+              </button>
+
             </div>
 
           </div>
