@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getProducts } from './services/products'
 import CategoryButtons from '../src/components/Buttons/CategoryButtons'
+import Navbar from '../src/components/Navbar'
 
 function App() {
 
@@ -34,15 +35,7 @@ function App() {
   return (
     <div className="page-container">
 
-      <header className="navbar">
-
-        <button className="menu-button">
-          ☰
-        </button>
-
-        <h2>Explore Vestmannaeyjar</h2>
-
-      </header>
+     <Navbar />
 
       <div className="hero-section">
         <h1>Explore Vestmannaeyjar</h1>
