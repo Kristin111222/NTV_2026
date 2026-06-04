@@ -1,4 +1,5 @@
 import IconButton from '@mui/material/IconButton'
+import { useNavigate } from 'react-router-dom'
 
 import LoginIcon from '@mui/icons-material/Login'
 import SearchIcon from '@mui/icons-material/Search'
@@ -6,10 +7,15 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 
 function NavbarButtons() {
+   const navigate = useNavigate()
   return (
     <div style={{ display: 'flex', gap: '16px' }}>
       
-      <IconButton color="primary" aria-label="login">
+        <IconButton
+        color="primary"
+        aria-label="login"
+        onClick={() => navigate('/login')}
+      >
         <LoginIcon />
       </IconButton>
 
