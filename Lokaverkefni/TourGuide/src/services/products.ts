@@ -6,8 +6,8 @@ export async function getProducts() {
     .select('*')
 
   if (error) {
-    console.log(error)
+    throw error
   }
- 
-  return data
-} 
+
+  return data ?? []
+}
