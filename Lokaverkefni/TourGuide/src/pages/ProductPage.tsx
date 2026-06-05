@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../services/products'
-
+import ProductInfo from '../components/ProductInfo'
 
 export default function ProductPage() {
   const { id } = useParams()
@@ -32,21 +32,9 @@ function addToCart(product: any) {
 
   return (
     <div className="page-container">
-      <h1>{product.name}</h1>
-
-      <img
-        src={`https://ampgjtiuisqkjanopwmz.supabase.co/storage/v1/object/public/Myndir/${product.image_url}`}
-        alt={product.name}
-        className="product-image"
-      />
-
-      <p>Price: ${product.prize}</p>
-
-      <p>{product.Description}</p>
-
-      <p>Date: {product.trip_date}</p>
-
-      <p>{product.description}</p>
+    
+<ProductInfo product={product} />
+     
 
      <button onClick={() => alert("Tour added to cart!")}>
   Book Tour

@@ -5,27 +5,21 @@ type ProductInfoProps = {
 export default function ProductInfo({ product }: ProductInfoProps) {
   return (
     <>
+
+      <h1>{product.name}</h1>
+
       <img
         src={`https://ampgjtiuisqkjanopwmz.supabase.co/storage/v1/object/public/Myndir/${product.image_url}`}
         alt={product.name}
         className="product-image"
       />
+      <p>Verð: {product.prize} kr.</p>
 
-      <div className="product-info">
-        <h2>{product.name}</h2>
+      <p>{product.Description}</p>
 
-        <p className="price">
-          Verð: {Number(product.prize).toLocaleString('is-IS')} kr.
-        </p>
+      <p>Date: {product.trip_date}</p>
 
-        <p className="date">
-          {product.trip_date}
-        </p>
-
-        <p>
-          {product.description}
-        </p>
-      </div>
+      <p>{product.description}</p>
     </>
   )
 }
