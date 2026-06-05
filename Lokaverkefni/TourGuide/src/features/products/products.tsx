@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { supabase } from '../../services/supabase'
 
 useEffect(() => {
   async function getProducts() {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('products')
       .select('*')
 

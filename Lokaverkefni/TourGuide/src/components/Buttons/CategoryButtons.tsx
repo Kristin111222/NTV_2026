@@ -1,16 +1,12 @@
-type Props = {
-  selectedCategory: number
+type CategoryButtonsProps = {
   setSelectedCategory: (id: number) => void
 }
 
 function CategoryButtons({
-  selectedCategory,
-  setSelectedCategory
-}: Props) {
-
+  setSelectedCategory,
+}: CategoryButtonsProps) {
   return (
     <div className="category-buttons">
-
       <button onClick={() => setSelectedCategory(0)}>
         All
       </button>
@@ -26,7 +22,6 @@ function CategoryButtons({
       <button onClick={() => setSelectedCategory(3)}>
         Museums & Culture
       </button>
-
     </div>
   )
 }

@@ -8,6 +8,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import Login from './pages/LoginPage'
 import ProductPage from './pages/ProductPage'
 import BookTourButton from './components/Buttons/BookTourButton'
+
 function App() {
   const [products, setProducts] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState(0)
@@ -50,7 +51,6 @@ function App() {
               </div>
 
               <CategoryButtons
-                selectedCategory={selectedCategory}
                 setSelectedCategory={setSelectedCategory}
               />
 
@@ -78,7 +78,11 @@ function App() {
                       <ProductInfo product={product} />
                     </Link>
 
-                    <BookTourButton onClick={() => alert('Tour added to cart!')} />
+                    <BookTourButton
+                      onClick={() =>
+                        alert('Tour added to cart!')
+                      }
+                    />
                   </div>
                 ))}
               </div>
