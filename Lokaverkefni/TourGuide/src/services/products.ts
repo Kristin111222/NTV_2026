@@ -9,7 +9,7 @@ export async function getProducts() {
     throw error
   }
 
-  return data ?? []
+  return data ?? [] 
 }
 
 export async function getProductById(id: string) {
