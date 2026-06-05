@@ -1,7 +1,22 @@
-import { useState } from 'react'
+type CartPageProps = {
+  cart: any[]
+}
 
-const [cart, setCart] = useState<any[]>([])
+export default function CartPage({ cart }: CartPageProps) {
+  return (
+    <div>
+      <h1>Karfan</h1>
 
-function addToCart(product: any) {
-  setCart((prev) => [...prev, product])
+      {cart.length === 0 ? (
+        <p>Karfan er tóm</p>
+      ) : (
+        cart.map((item) => (
+          <div key={item.id}>
+            <h3>{item.name}</h3>
+            <p>{item.prize} kr.</p>
+          </div>
+        ))
+      )}
+    </div>
+  )
 }
