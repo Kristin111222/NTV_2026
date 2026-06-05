@@ -10,9 +10,14 @@ import Login from './pages/LoginPage'
 import ProductPage from './pages/ProductPage'
 
 function App() {
+  const [cart, setCart] = useState<any[]>([])
   const [products, setProducts] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState(0)
   const [search, setSearch] = useState('')
+
+  function addToCart(product: any) {
+  setCart([...cart, product])
+}
 
   useEffect(() => {
     async function loadProducts() {
