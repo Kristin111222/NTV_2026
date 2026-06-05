@@ -39,6 +39,10 @@ export default function ProductPage() {
       <p>Date: {product.trip_date}</p>
 
       <p>{product.description}</p>
+
+     <button onClick={() => alert("Tour added to cart!")}>
+  Book Tour
+</button>
     </div>
   )
 }
