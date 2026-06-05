@@ -1,25 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getProducts } from './services/products'
 import CategoryButtons from '../src/components/Buttons/CategoryButtons'
 import Navbar from '../src/components/Navbar'
 import NavbarButtons from '../src/components/Buttons/IconButtons'
-import { useQuery } from '@tanstack/react-query'
-
-
+import Login from './pages/LoginPage'
+import { Routes, Route } from 'react-router-dom'
 function App() {
 
-
+  const [products, setProducts] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState(0)
   const [search, setSearch] = useState("")
 
-  const { data: products = [], isLoading } = useQuery({
-  queryKey: ['products'],
-  queryFn: getProducts,
-})
 
+  useEffect(() => {
+    async function loadProducts() {
+      const data = await getProducts()
+      setProducts(data || [])
+    }
 
-
-
+    loadProducts()
+  }, [])
 
   const filteredProducts = products.filter((product) => {
 
@@ -35,7 +35,7 @@ function App() {
     return matchesCategory && matchesSearch
   })
 
-  return (
+   return (
   <>
     <NavbarButtons />
 
