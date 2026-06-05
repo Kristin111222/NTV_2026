@@ -42,13 +42,15 @@ function App() {
   })
 
  return (
+  <>
+  <NavbarButtons />
   <Routes>
 
     <Route
       path="/"
       element={
         <>
-          <NavbarButtons />
+          
 
           <div className="page-container">
             <Navbar />
@@ -122,6 +124,7 @@ function App() {
     />
 
   </Routes>
+  </>
 )
 }
 
