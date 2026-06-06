@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+      "deploy": "gh-pages -d dist",
+      "homepage": "https://github.com/Kristin111222/NTV_2026/tree/main/Lokaverkefni/TourGuide"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
