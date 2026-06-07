@@ -29,9 +29,7 @@ function NavbarButtons() {
         <LoginIcon />
       </IconButton>
 
-      <IconButton color="primary" aria-label="search">
-        <SearchIcon />
-      </IconButton>
+   
 
       <IconButton color="primary" aria-label="cart"
       onClick={() => navigate('/CartPage')}
