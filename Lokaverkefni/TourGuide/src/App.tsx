@@ -1,18 +1,26 @@
 import { useEffect, useState } from 'react'
-import { getProducts } from './services/products'
-import CategoryButtons from './components/Buttons/CategoryButtons'
-import Navbar from './components/Navbar'
-import NavbarButtons from './components/Buttons/IconButtons'
-import ProductInfo from './components/ProductInfo'
 import { Routes, Route, Link } from 'react-router-dom'
+
+import { getProducts } from './services/products'
+
+import CategoryButtons from './components/Buttons/CategoryButtons'
+import NavbarButtons from './components/Buttons/IconButtons'
+import BookTourButton from './components/Buttons/BookTourButton'
+
+import ProductInfo from './components/ProductInfo'
+
 import Login from './pages/LoginPage'
 import ProductPage from './pages/ProductPage'
-import BookTourButton from './components/Buttons/BookTourButton'
+
+import CartPage from './pages/CartPage'
+import { useCart } from './features/cart/context/CartContext'
 
 function App() {
   const [products, setProducts] = useState<any[]>([])
   const [selectedCategory, setSelectedCategory] = useState(0)
   const [search, setSearch] = useState('')
+
+  const { addToCart } = useCart()
 
   useEffect(() => {
     async function loadProducts() {
@@ -36,16 +44,14 @@ function App() {
   })
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <>
-            <NavbarButtons />
+    <>
+      <NavbarButtons />
 
+      <Routes>
+        <Route
+          path="/"
+          element={
             <div className="page-container">
-              <Navbar />
-
               <div className="hero-section">
                 <h1>Explore Vestmannaeyjar</h1>
               </div>
@@ -79,28 +85,34 @@ function App() {
                     </Link>
 
                     <BookTourButton
-                      onClick={() =>
-                        alert('Tour added to cart!')
-                      }
-                    />
+  onClick={() => {
+    addToCart(product)
+    alert("You have booked the tour!")
+  }}
+/>
                   </div>
                 ))}
               </div>
             </div>
-          </>
-        }
-      />
+          }
+        />
 
-      <Route
-        path="/products/:id"
-        element={<ProductPage />}
-      />
+        <Route
+          path="/products/:id"
+          element={<ProductPage />}
+        />
 
-      <Route
-        path="/login"
-        element={<Login />}
-      />
-    </Routes>
+        <Route
+          path="/cart"
+          element={<CartPage />}
+        />
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+      </Routes>
+    </>
   )
 }
 

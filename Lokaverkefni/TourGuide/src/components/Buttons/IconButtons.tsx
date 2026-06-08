@@ -31,11 +31,13 @@ function NavbarButtons() {
 
    
 
-      <IconButton color="primary" aria-label="cart"
-      onClick={() => navigate('/CartPage')}
-      >
-        <ShoppingCartIcon />
-      </IconButton>
+     <IconButton
+  color="primary"
+  aria-label="cart"
+  onClick={() => navigate('/cart')}
+>
+  <ShoppingCartIcon />
+</IconButton>
 
 
      
