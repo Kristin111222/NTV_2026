@@ -75,7 +75,7 @@ function App() {
                     className="product-card"
                   >
                     <Link
-                      to={`/products/${product.id}`}
+                      to={`/products/${product.id}`} 
                       style={{
                         textDecoration: 'none',
                         color: 'inherit',

@@ -22,7 +22,7 @@ function NavbarButtons() {
 
 <IconButton
   color="primary"
-  aria-label="login"
+  aria-label="login" 
   onClick={() => navigate('/login')}
 >
 
