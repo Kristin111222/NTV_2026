@@ -44,7 +44,13 @@ function App() {
   })
 
   return (
-    <>
+     <div
+    style={{
+      backgroundColor: 'black',
+      color: 'white',
+      minHeight: '100vh',
+    }}
+  >
       <NavbarButtons />
 
       <Routes>
@@ -112,7 +118,8 @@ function App() {
           element={<Login />}
         />
       </Routes>
-    </>
+        </div>
+    
   )
 }
 
