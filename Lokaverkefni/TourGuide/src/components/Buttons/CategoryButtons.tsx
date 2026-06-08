@@ -12,7 +12,7 @@ function CategoryButtons({
       </button>
 
       <button onClick={() => setSelectedCategory(1)}>
-        Adventure Tours
+        Hiking Tours
       </button>
 
       <button onClick={() => setSelectedCategory(2)}>
