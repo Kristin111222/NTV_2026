@@ -1,5 +1,5 @@
 import { useCart } from '../features/cart/context/CartContext'
-
+  import { Link } from 'react-router-dom'
 
 export default function CartPage() {
   const {
@@ -40,18 +40,18 @@ export default function CartPage() {
                 <button
                   onClick={() => increaseQuantity(item.id)}
                 >
-                  +
+                  
                 </button>
               </div>
 
               <p>
-                Samtals: {item.prize * item.quantity} kr.
+                Total: {item.prize * item.quantity} kr.
               </p>
 
               <button
                 onClick={() => removeFromCart(item.id)}
               >
-                Fjarlægja
+                Delete
               </button>
 
               <hr />
@@ -59,7 +59,14 @@ export default function CartPage() {
           ))}
 
           <h2>Heildarverð: {totalPrice} kr.</h2>
-        </>
+       
+
+      
+
+<Link to="/checkout">
+  <button>Pay: {totalPrice} kr.</button>
+</Link>
+ </>
       )}
     </div>
   )

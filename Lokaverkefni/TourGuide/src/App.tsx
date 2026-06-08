@@ -14,6 +14,8 @@ import ProductPage from './pages/ProductPage'
 
 import CartPage from './pages/CartPage'
 import { useCart } from './features/cart/context/CartContext'
+import CheckoutPage from './pages/CheckoutPage'
+import ConfirmationPage from './pages/ConfirmationPage'
 
 function App() {
   const [products, setProducts] = useState<any[]>([])
@@ -120,8 +122,19 @@ return (
       />
 
       <Route
+  path="/checkout"
+  element={<CheckoutPage />}
+/>
+
+<Route
+  path="/confirmation"
+  element={<ConfirmationPage />}
+/>
+
+      <Route
         path="/login"
         element={<Login />}
+        
       />
     </Routes>
   </div>
