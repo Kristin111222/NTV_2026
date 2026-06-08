@@ -10,53 +10,27 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div>
-      <h1>Payment Details</h1>
+    <div className="checkout-container">
+    <h1>Payment Details</h1>
 
-      <form
-        className="checkout-form"
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="text"
-          placeholder="Full Name"
-          required
-        />
+    <form
+      className="checkout-form"
+      onSubmit={handleSubmit}
+      style={{
+        display: 'grid',
+        width: '400px',
+        gap: '10px',
+      }}
+    >
+      <input type="text" placeholder="Full Name" />
+      <input type="email" placeholder="Email" />
+      <input type="tel" placeholder="Phone Number" />
+      <input type="text" placeholder="Card Number" />
+      <input type="text" placeholder="Expiry Date" />
+      <input type="text" placeholder="CVV" />
 
-        <input
-          type="email"
-          placeholder="Email"
-          required
-        />
-
-        <input
-          type="tel"
-          placeholder="Phone Number"
-          required
-        />
-
-        <input
-          type="text"
-          placeholder="Card Number"
-          required
-        />
-
-        <input
-          type="text"
-          placeholder="Expiry Date"
-          required
-        />
-
-        <input
-          type="text"
-          placeholder="CVV"
-          required
-        />
-
-        <button type="submit">
-          Pay
-        </button>
-      </form>
-    </div>
-  )
+      <button type="submit">Pay</button>
+    </form>
+  </div>
+)
 }

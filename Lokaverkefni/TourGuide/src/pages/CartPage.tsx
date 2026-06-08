@@ -40,7 +40,7 @@ export default function CartPage() {
                 <button
                   onClick={() => increaseQuantity(item.id)}
                 >
-                  
+                  +
                 </button>
               </div>
 
