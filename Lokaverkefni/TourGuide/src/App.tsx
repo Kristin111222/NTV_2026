@@ -32,21 +32,105 @@ function App() {
   }, [])
 
   const filteredProducts = products.filter((product) => {
-    const matchesCategory =
-      selectedCategory === 0 ||
-      product.category_id === selectedCategory
+  const matchesCategory =
+    selectedCategory === 0 ||
+    product.category_id === selectedCategory
 
-    const matchesSearch = product.name
-      .toLowerCase()
-      .includes(search.toLowerCase())
+  const matchesSearch = product.name
+    .toLowerCase()
+    .includes(search.toLowerCase())
 
-    return matchesCategory && matchesSearch
-  })
+  return matchesCategory && matchesSearch
+})
+
+const sortedProducts = [...filteredProducts].sort((a, b) => {
+  if (a.id === 1) return -1
+  if (b.id === 1) return 1
+  return 0
+})
+
+return (
+  <div
+    style={{
+      backgroundColor: '#2f2f2f',
+      color: 'white',
+      minHeight: '100vh',
+    }}
+  >
+    <NavbarButtons />
+
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="page-container">
+            <div className="hero-section">
+              <h1>Explore Vestmannaeyjar</h1>
+            </div>
+
+            <CategoryButtons
+              setSelectedCategory={setSelectedCategory}
+            />
+
+            <input
+              type="text"
+              placeholder="Search tours..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="search-input"
+            />
+
+            <div className="products-grid">
+              {sortedProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="product-card"
+                >
+                  <Link
+                    to={`/products/${product.id}`}
+                    style={{
+                      textDecoration: 'none',
+                      color: 'inherit',
+                    }}
+                  >
+                    <ProductInfo product={product} />
+                  </Link>
+
+                  <BookTourButton
+                    onClick={() => {
+                      addToCart(product)
+                      alert('You have booked the tour!')
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+      />
+
+      <Route
+        path="/products/:id"
+        element={<ProductPage />}
+      />
+
+      <Route
+        path="/cart"
+        element={<CartPage />}
+      />
+
+      <Route
+        path="/login"
+        element={<Login />}
+      />
+    </Routes>
+  </div>
+)
 
   return (
      <div
     style={{
-      backgroundColor: 'black',
+      backgroundColor: '#2f2f2f',
       color: 'white',
       minHeight: '100vh',
     }}
@@ -75,7 +159,7 @@ function App() {
               />
 
               <div className="products-grid">
-                {filteredProducts.map((product) => (
+                {sortedProducts.map((product) => (
                   <div
                     key={product.id}
                     className="product-card"
