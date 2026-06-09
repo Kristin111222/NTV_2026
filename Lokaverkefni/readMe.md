@@ -17,6 +17,9 @@ Tour Guide er vefsíða sem selur útivistarferðir og afþreyingu í Vestmannae
 
 [TourGuide](https://ntv-2026.vercel.app/)
 
+- User    : 123@hi.is
+- Password: 12341234
+
 ### Keyra verkefnið
 
 ```bash

@@ -1,7 +1,12 @@
 import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect, vi } from 'vitest'
 import CartPage from '../CartPage'
+
+vi.mock('react-router-dom', () => ({
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
+}))
 
 vi.mock('../../features/cart/context/CartContext', () => ({
   useCart: () => ({
@@ -17,17 +22,13 @@ vi.mock('../../features/cart/context/CartContext', () => ({
     decreaseQuantity: vi.fn(),
     removeFromCart: vi.fn(),
   }),
-}))
+})) 
 
 describe('CartPage', () => {
   it('renders product in cart', () => {
-    render(
-      <MemoryRouter>
-        <CartPage />
-      </MemoryRouter>
-    )
+    render(<CartPage />) 
 
-    expect(screen.getByText('New Lava Tour')).toBeTruthy()
-    expect(screen.getByText('Heildarverð: 20000 kr.')).toBeTruthy()
+   expect(screen.getByText('New Lava Tour')).toBeDefined()
+expect(screen.getByText('Heildarverð: 20000 kr.')).toBeDefined()
   })
 })
