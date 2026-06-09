@@ -1,23 +1,33 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect, vi } from 'vitest'
-import CheckoutPage from '../CheckoutPage'
+import CartPage from '../CartPage'
 
-const mockNavigate = vi.fn()
-
-vi.mock('react-router-dom', () => ({
-  useNavigate: () => mockNavigate,
+vi.mock('../../features/cart/context/CartContext', () => ({
+  useCart: () => ({
+    cart: [
+      {
+        id: 1,
+        name: 'New Lava Tour',
+        prize: 10000,
+        quantity: 2,
+      },
+    ],
+    increaseQuantity: vi.fn(),
+    decreaseQuantity: vi.fn(),
+    removeFromCart: vi.fn(),
+  }),
 }))
 
-describe('CheckoutPage', () => {
-  it('navigates to confirmation page when form is submitted', () => {
-    render(<CheckoutPage />)
+describe('CartPage', () => {
+  it('renders product in cart', () => {
+    render(
+      <MemoryRouter>
+        <CartPage />
+      </MemoryRouter>
+    )
 
-    const payButton = screen.getByRole('button', {
-      name: /pay/i,
-    })
-
-    fireEvent.click(payButton)
-
-    expect(mockNavigate).toHaveBeenCalledWith('/confirmation')
+    expect(screen.getByText('New Lava Tour')).toBeTruthy()
+    expect(screen.getByText('Heildarverð: 20000 kr.')).toBeTruthy()
   })
 })
