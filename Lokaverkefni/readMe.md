@@ -1,24 +1,135 @@
-# Lokaverkefni 2026
+# Lokaverkefni NTV 2026
 
-## Hugmynd nr. 1
+## Tour Guide
 
-Búð sem selur útivist í Vestmannaeyjum
+**Nemandi:** Kristín Sesselja Róbertsdóttir
+**Netfang:** [robertsdottir86@gmail.com](mailto:robertsdottir86@gmail.com)
 
-### Virknikröfur: 
-- setja hluti í körfu, greiða fyrir, fá staðfestingu/áminningu í email
-### Notendakröfur: 
--Notandi getur valið sér hluti, magn hluta, sett í körfu
--Notandi getur greitt fyrir vöruna
-### Viðskiptakrafa: 
-- Fólk á aldrinum 18-99 ára getur keypt sér hluti á síðunni.
+**Athugið:** README er á íslensku en vefsíðan sjálf er á ensku.
 
-Vefsíðan:
-Útivist í Vestmannaeyjum
-Val um upplifanir
+---
 
-Hlutir:
-1) Lundahúsið Stórhöfða 08.08.26 10.000 kr.-
-2) Nýja hraunið - 15.08.26              20.000 kr.-
-3) Ganga á eldfell með leiðsögumanni  - 22.08.26 - 5.000 kr.-
-4) Ganga á Heimaklett 23.08.26 - 10.000 kr.-
-5) Ganga á Stórhöfða 16.08.26 5.000 kr.-
+## Um verkefnið
+
+Tour Guide er vefsíða sem selur útivistarferðir og afþreyingu í Vestmannaeyjum. Notendur geta skoðað ferðir, leitað að vörum, flokkað þær eftir flokkum, bætt þeim í körfu og framkvæmt gervi greiðslu.
+
+### Skoða vefsíðu
+
+[TourGuide](https://ntv-2026.vercel.app/)
+
+### Keyra verkefnið
+
+```bash
+npm install
+npm run dev
+```
+
+### Framkvæma test
+
+```bash
+npm test
+```
+
+---
+
+## Vefsíðan:
+
+* VS Code
+* React
+* TypeScript
+* React Query
+* Postman
+* Supabase
+
+  * Products
+  * Categories
+  * Images
+  * Authentication
+* State Management (Shopping Cart)
+* Vercel Deployment
+
+---
+
+## Helsta virkni
+
+### Forsíða
+
+* Kynning á ferðum og þjónustu
+
+### Icon buttons
+* Home
+* Login
+* Cart
+
+### Vörur
+
+* Skoða allar vörur
+* Skoða staka vöru
+* Leita að vörum
+* Flokka og sía vörur
+
+### Notendur
+
+* Innskráning
+
+### Karfa
+
+* Bæta við vöru
+* Fjarlægja vöru
+* Breyta magni vöru
+* State Management fyrir körfu
+
+### Greiðsluferli
+
+* Fake greiðsla
+* Checkout síða
+* Staðfestingarsíða eftir greiðslu
+
+---
+
+## Test
+
+Verkefnið inniheldur tvö test:
+
+* Cart Test
+* Payment Test
+
+---
+
+## Flokkar og vörur
+
+### Hiking Tours
+
+* Helgafell
+* Eldfell
+* New Lava
+* Stórhöfði
+* Puffin House
+
+### Northern Lights Tours
+
+* Northern Lights 1
+* Northern Lights 2
+* Northern Lights 3
+
+### Museums & Culture
+
+* Eldheimar 1
+* Eldheimar 2
+* Einarsstofa 1
+* Einarsstofa 2
+
+
+---
+
+## Viðskiptakrafa
+
+Fólk á aldrinum 18–99 ára getur keypt ferðir og afþreyingu í gegnum vefsíðuna.
+
+---
+
+## Hugleiðingar
+
+1) Setja næst upp shadcn/ui í byrjun, því ég þurfti að gera quick fix með form í lokin.
+2) Gera fleiri fín form, en ég gerði aðeins fyrir ckeckoutPage
+3) Test fyrir cartpage virkar ekki.
