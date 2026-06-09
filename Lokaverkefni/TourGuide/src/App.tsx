@@ -17,6 +17,7 @@ import { useCart } from './features/cart/context/CartContext'
 import CheckoutPage from './pages/CheckoutPage'
 import ConfirmationPage from './pages/ConfirmationPage'
 
+
 import './App.css'
 
 function App() {
