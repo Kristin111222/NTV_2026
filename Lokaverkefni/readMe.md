@@ -135,4 +135,5 @@ Fólk á aldrinum 18–99 ára getur keypt ferðir og afþreyingu í gegnum vefs
 
 1) Setja næst upp shadcn/ui í byrjun, því ég þurfti að gera quick fix með form í lokin.
 2) Gera fleiri fín form, en ég gerði aðeins fyrir ckeckoutPage
-3) Test fyrir cartpage virkar ekki.
+3) Vercel sýnir síðuna, en getur ekki sýnt CartPage og CheckoutPage.
+   Verkefnið virkar á minni tölvu og buildar rétt, en Vercel lenti í Deployment villu sem tengist Vite.
